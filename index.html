@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Dashboard Login</title>
-  <link rel="stylesheet" href="CSS/styles.css">
+  <title>ESP Login</title>
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 
       <div>
         <h1>ESP Control</h1>
-        <div class="subtitle">Cloud Powered IoT Dashboard</div>
+        <div class="subtitle">Cloud Powered ESP Management</div>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
 </div>
 
 <script type="module">
-import { login } from './js/auth.js'
+import { login } from './JS/auth.js'
 
 loginBtn.onclick = async () => {
   login(email.value, password.value)
