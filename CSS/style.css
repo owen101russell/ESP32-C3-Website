@@ -4,83 +4,73 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #050816;
+  --card: rgba(15, 23, 42, 0.75);
+  --border: rgba(255,255,255,0.08);
+  --primary: #38bdf8;
+  --primary-dark: #0ea5e9;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --shadow: 0 10px 40px rgba(0,0,0,0.35);
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
+  font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
+  color: var(--text);
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 35%),
+    linear-gradient(135deg, #020617 0%, #0f172a 45%, #020617 100%);
 }
 
-.login-container {
+/* Animated Background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating glow blobs */
+body::after {
+  content: "";
+  position: fixed;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.12);
+  filter: blur(120px);
+  top: -200px;
+  right: -200px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+}
+
+.topbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
+  margin-bottom: 30px;
 }
 
-.card {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 16px;
-  padding: 32px;
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-card h1 {
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  color: #94a3b8;
-  margin-bottom: 24px;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 16px;
-
-  border: 1px solid #334155;
-  border-radius: 10px;
-
-  background: #0f172a;
-  color: white;
-
-  outline: none;
-}
-
-input:focus {
-  border-color: #3b82f6;
-}
-
-button {
-  width: 100%;
-  padding: 14px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: #3b82f6;
-  color: white;
-
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.2s;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-.error {
-  display: none;
-
-  background: #7f1d1d;
-  color: #fecaca;
-
-  padding: 10px;
-  border-radius: 8px;
-
-  margin-bottom: 16px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }

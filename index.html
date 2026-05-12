@@ -3,56 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Login</title>
-
+  <title>IoT Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div class="login-container">
+<div class="page">
 
-  <div class="card login-card">
+  <div class="topbar">
 
-    <h1>IoT Dashboard</h1>
-    <p class="subtitle">Sign in to continue</p>
+    <div>
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
 
-    <div id="error" class="error"></div>
+        <div>
+          <h1>ESP32-C3 Dashboard</h1>
+          <div class="subtitle">
+            Realtime cloud-controlled IoT devices
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <input 
-      id="email"
-      type="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
+    <div class="nav-buttons">
+      <a href="account.html">
+        <button class="secondary-btn">Account</button>
+      </a>
 
-    <input 
-      id="password"
-      type="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
-
-    <button id="loginBtn">
-      Login
-    </button>
+      <button class="add-device-btn" onclick="addDevice()">
+        + Add Device
+      </button>
+    </div>
 
   </div>
 
+  <div id="devices" class="dashboard-grid"></div>
+
 </div>
 
-<script type="module">
-import { login } from './js/auth.js'
-
-const loginBtn = document.getElementById("loginBtn")
-
-loginBtn.onclick = async () => {
-  login(
-    document.getElementById("email").value,
-    document.getElementById("password").value
-  )
-}
-</script>
+<script type="module" src="js/home.js"></script>
 
 </body>
 </html>

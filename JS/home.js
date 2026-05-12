@@ -6,61 +6,86 @@ await requireAuth()
 const container = document.getElementById("devices")
 
 async function loadDevices() {
-  const { data } = await supabase.from('device_full').select('*')
+  const { data } = await supabase
+    .from('device_full')
+    .select('*')
 
   container.innerHTML = ""
 
   data.forEach(device => {
-    const div = document.createElement("div")
-    div.className = "card"
+    const card = document.createElement("div")
+    card.className = "glass device-card"
 
-    div.innerHTML = `<h2>${device.name}</h2>`
+    let tasksHTML = ""
 
     Object.keys(device.state).forEach(key => {
-      const val = device.state[key].value
+      const active = device.state[key].value
 
-      const btn = document.createElement("button")
-      btn.textContent = `${key}: ${val ? "ON" : "OFF"}`
+      tasksHTML += `
+        <div class="task">
 
-      btn.onclick = async () => {
-        device.state[key].value = !val
+          <div class="task-info">
+            <h3>${key}</h3>
+            <p>
+              Pin ${device.config[key]?.pin || "?"}
+            </p>
+          </div>
+
+          <div
+            class="toggle ${active ? 'active' : ''}"
+            data-key="${key}"
+          >
+            <div class="toggle-circle"></div>
+          </div>
+
+        </div>
+      `
+    })
+
+    card.innerHTML = `
+      <div class="device-header">
+
+        <div>
+          <div class="device-title">${device.name}</div>
+        </div>
+
+        <div class="device-status">
+          Online
+        </div>
+
+      </div>
+
+      <div class="tasks">
+        ${tasksHTML}
+      </div>
+
+      <div class="card-actions">
+        <button class="secondary-btn small-btn edit-btn">
+          Edit
+        </button>
+      </div>
+    `
+
+    card.querySelectorAll('.toggle').forEach(toggle => {
+      toggle.onclick = async () => {
+        const key = toggle.dataset.key
+
+        device.state[key].value = !device.state[key].value
 
         await supabase
           .from('device_state')
           .update({ state: device.state })
           .eq('device_id', device.device_id)
-
-        loadDevices()
       }
-
-      div.appendChild(btn)
     })
 
-    const editBtn = document.createElement("button")
-    editBtn.textContent = "Edit"
-    editBtn.onclick = () => {
+    card.querySelector('.edit-btn').onclick = () => {
       localStorage.setItem("device_id", device.device_id)
       window.location.href = "edit.html"
     }
 
-    div.appendChild(editBtn)
-
-    container.appendChild(div)
+    container.appendChild(card)
   })
-}
-
-window.addDevice = async () => {
-  const name = prompt("Device name:")
-  const id = crypto.randomUUID()
-
-  await supabase.from('devices').insert([{ id, name }])
-  await supabase.from('device_state').insert([{
-    device_id: id,
-    state: {},
-    config: {}
-  }])
-
-  loadDevices()
 }
 
 loadDevices()
