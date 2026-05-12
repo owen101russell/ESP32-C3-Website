@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Edit Device</title>
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
-<h1>Edit Device</h1>
-<div id="editor"></div>
+<div class="page">
 
-<script type="module" src="js/edit.js"></script>
+  <div class="glass editor-panel">
+
+    <h1>Edit Device</h1>
+
+    <br>
+
+    <div class="component-row">
+      <input placeholder="Component Name">
+      <select>
+        <option>digital</option>
+        <option>pwm</option>
+      </select>
+    </div>
+
+    <div class="component-row">
+      <input placeholder="Pin Number">
+      <input placeholder="Default Value">
+    </div>
+
+    <button class="primary-btn">
+      Save Device
+    </button>
+
+    <br><br>
+
+    <a href="home.html">
+      <button class="secondary-btn">
+        Back
+      </button>
+    </a>
+
+  </div>
+
+</div>
 
 </body>
 </html>

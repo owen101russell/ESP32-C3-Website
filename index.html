@@ -3,45 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Dashboard</title>
+  <title>IoT Dashboard Login</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div class="page">
+<div class="login-container">
 
-  <div class="topbar">
+  <div class="glass login-card">
 
-    <div>
-      <div class="brand">
-        <div class="brand-icon">⚡</div>
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
 
-        <div>
-          <h1>ESP32-C3 Dashboard</h1>
-          <div class="subtitle">
-            Realtime cloud-controlled IoT devices
-          </div>
-        </div>
+      <div>
+        <h1>ESP Control</h1>
+        <div class="subtitle">Cloud Powered IoT Dashboard</div>
       </div>
     </div>
 
-    <div class="nav-buttons">
-      <a href="account.html">
-        <button class="secondary-btn">Account</button>
-      </a>
+    <br><br>
 
-      <button class="add-device-btn" onclick="addDevice()">
-        + Add Device
-      </button>
-    </div>
+    <div id="error" class="error"></div>
+
+    <input id="email" type="email" placeholder="Email">
+
+    <input id="password" type="password" placeholder="Password">
+
+    <button id="loginBtn" class="primary-btn">
+      Login
+    </button>
 
   </div>
 
-  <div id="devices" class="dashboard-grid"></div>
-
 </div>
 
-<script type="module" src="js/home.js"></script>
+<script type="module">
+import { login } from './js/auth.js'
+
+loginBtn.onclick = async () => {
+  login(email.value, password.value)
+}
+</script>
 
 </body>
 </html>
